@@ -1,2 +1,10 @@
-# Heroes of Might and Magic on Board
+## Heroes of Might and Magic on Board
+![alt text](https://lh3.googleusercontent.com/DSzxqTRhEgznknzAdApnaK4rNLrfJ9z5cL1IW_PajlLkhF1t4OZBaQD3sr7Jz8sMHPIdrxSmEAEsT9VQ_P3cHXvkLtS646ffRCBc7T-8GB7cXc9lgjHW_Xn9SDRgrcRm6nGHq1lKsIM7c31RLK6bVcTw6vb8ZQcg0Z_w2Eg69cpckKmQ72KuiUa6y5Lxa4aAM3x4fZuKz2qAHN1k0OJqVMC8vVq_oCZ5OzBjfsNFASMSum9QrmYGZlLyLdZ5gL_bjnkrFlV86cK15gxTG3KARBoVKXkFD5flYbzqCnlIJpl0uKqM1rMd6Gu0gCoY0B9XR4i5roOa5Un2IARfNhwLNbjvOMHlBudpMidDgmaR3N7X7T6tSOmeEibdlpjBNYethMwIkXfVyRGQfHetANI-YT0Gqu0Pi5v0a493AwSVtW5iFydmsubGRbQ_eM54_rcOlT5I8bjxZw735REmbmEBJIMVigBVaPdG8TodlTdFfuY-ovcr9np2PZQCKrvhLnTafIuIg8PaJ_sz5m4cN6yX2pubLRgeWAygYNhuvja7r9E8BxgdfXhxX-uH0IL8KKxHlsaUXRV88iACy4X8_7LdVuU6LdRuUleMVwapaln7ECrbc-TVADYItVCuwboR7579VYMvhAjB16KY8PcXhEoUXttCjMiHbkb1Ks2Q-tKpgeYMllNBJc8a7wBjGe8=w1440-h367-no?authuser=4)
 
+This is just an attempt to reproduce HOMM 3 with the style of a board game.
+
+#### Intro page
+https://hommonboard.github.io/
+
+#### Workflow page
+https://hommonboard.herokuapp.com/
