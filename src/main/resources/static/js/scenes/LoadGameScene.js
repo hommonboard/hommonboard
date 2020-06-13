@@ -4,8 +4,8 @@ export default class LoadGameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mapTiles', '../assets/tilemaps/tiles/ground.png');
-        this.load.tilemapTiledJSON('map', '../assets/tilemaps/maps/ground.json');
+        this.load.image('groundTiles', '../assets/tilemaps/tiles/ground.png');
+        this.load.tilemapTiledJSON('map', '../assets/tilemaps/maps/map.json');
     }
 
     create() {
