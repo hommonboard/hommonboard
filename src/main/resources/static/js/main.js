@@ -1,3 +1,4 @@
+import IntroScene from "./scenes/IntroScene.js";
 import LoadGameScene from "./scenes/LoadGameScene.js";
 import GameScene from "./scenes/GameScene.js";
 import {createResizeGameWindowFunction} from "./utils.js"
@@ -10,7 +11,7 @@ window.onload = function() {
       backgroundColor: '#2d2d2d',
       parent: 'gameContainer',
       pixelArt: true,
-      scene: [LoadGameScene, GameScene]
+      scene: [IntroScene, LoadGameScene, GameScene]
   };
 
   var game = new Phaser.Game(config);
