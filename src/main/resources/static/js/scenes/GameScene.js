@@ -24,6 +24,9 @@ export default class GameScene extends Phaser.Scene {
         };
 
         this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+
+        this.hero = this.add.sprite(32, 32, "luna");
+
     }
 
     update(time, delta) {

@@ -1,13 +1,6 @@
-export default class IntroScene extends Phaser.Scene {
+export default class MenuScene extends Phaser.Scene {
     constructor() {
-        super("IntroScene");
-    }
-
-    preload() {
-        this.load.image("introBackground", "/assets/images/intro/clear-sky.png" );
-        this.load.image("hommonboard", "/assets/images/intro/hommonboard.png" );
-        this.load.image("githublogo", "/assets/images/intro/githublogo.png" );
-        this.load.bitmapFont("font", "/assets/fonts/font_empty.png", "/assets/fonts/font_empty.fnt");
+        super("MenuScene");
     }
 
     create() {
@@ -37,7 +30,7 @@ export default class IntroScene extends Phaser.Scene {
             "Play",
             23
         );
-        menuPlay.x = this.game.config.width / 2 - menuPlay.width / 2;
+        menuPlay.setOrigin(0.5, 1);
         menuPlay.setInteractive();
         menuPlay.on("pointerdown", () => this.scene.start("LoadGameScene"), this);
         menuPlay.on("pointerover", () => pointerOver(menuPlay), this);
