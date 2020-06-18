@@ -6,21 +6,27 @@ import GameScene from "./scenes/gameScene.js";
 import {createResizeGameWindowFunction} from "./utils.js"
 
 window.onload = function() {
-  var config = {
-      type: Phaser.WEBGL,
-      width: window.innerWidth,
-      height: window.innerHeight,
-      backgroundColor: '#2d2d2d',
-      parent: 'gameContainer',
-      pixelArt: true,
-      scene: [PreloadScene, LoadMenuScene, MenuScene, LoadGameScene, GameScene]
-  };
+    var config = {
+        type: Phaser.WEBGL,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        backgroundColor: '#2d2d2d',
+        parent: 'gameContainer',
+        physics: {
+            default: "arcade",
+            arcade: {
+                gravity: { y: 0 } // Top down game, so no gravity
+            }
+        },
+        pixelArt: true,
+        scene: [PreloadScene, LoadMenuScene, MenuScene, LoadGameScene, GameScene]
+    };
 
-  var game = new Phaser.Game(config);
+    var game = new Phaser.Game(config);
 
-  var resizeGameWindow = createResizeGameWindowFunction(game);
-  resizeGameWindow();
-  window.addEventListener("resize", resizeGameWindow, false);
+    var resizeGameWindow = createResizeGameWindowFunction(game);
+    resizeGameWindow();
+    window.addEventListener("resize", resizeGameWindow, false);
 };
 
 
