@@ -1,4 +1,4 @@
-import BaseLoadScene from "./BaseLoadScene.js";
+import BaseLoadScene from "./baseLoadScene.js";
 
 export default class LoadMenuScene extends BaseLoadScene {
     constructor() {

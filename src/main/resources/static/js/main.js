@@ -1,8 +1,8 @@
-import PreloadScene from "./scenes/load/PreloadScene.js";
-import LoadMenuScene from "./scenes/load/LoadMenuScene.js";
-import MenuScene from "./scenes/MenuScene.js";
-import LoadGameScene from "./scenes/load/LoadGameScene.js";
-import GameScene from "./scenes/GameScene.js";
+import PreloadScene from "./scenes/load/preloadScene.js";
+import LoadMenuScene from "./scenes/load/loadMenuScene.js";
+import MenuScene from "./scenes/menuScene.js";
+import LoadGameScene from "./scenes/load/loadGameScene.js";
+import GameScene from "./scenes/gameScene.js";
 import {createResizeGameWindowFunction} from "./utils.js"
 
 window.onload = function() {
