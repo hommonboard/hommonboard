@@ -7,8 +7,10 @@ export default class GameScene extends Phaser.Scene {
         var map = this.make.tilemap({ key: 'map' });
         var groundTiles = map.addTilesetImage('ground', 'groundTiles');
         var borderTiles = map.addTilesetImage('gameBoardBorder', 'borderTiles');
+        var fogTiles = map.addTilesetImage('spaceTile', 'fogTiles');
         var groundLayer = map.createStaticLayer("GroundLayer", groundTiles, 0, 0);
         var borderLayer = map.createStaticLayer("BorderLayer", borderTiles, 0, 0);
+        this.fogLayer = map.createDynamicLayer("FogLayer", fogTiles, 0, 0);
         borderLayer.setCollisionByProperty({ collides: true });
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -19,6 +21,7 @@ export default class GameScene extends Phaser.Scene {
         let camera = this.cameras.main;
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         camera.startFollow(this.hero);
+        this.showMap();
     }
 
     update(time, delta) {
@@ -37,6 +40,25 @@ export default class GameScene extends Phaser.Scene {
             this.hero.body.setVelocityY(-200);
         } else if (this.cursors.down.isDown) {
             this.hero.body.setVelocityY(200);
+        }
+
+        this.showMap();
+    }
+
+    showMap() {
+        let radius = 2;
+        let indX = this.fogLayer.worldToTileX(this.hero.x);
+        let indY = this.fogLayer.worldToTileY(this.hero.y);
+
+        let startIndX = Math.max(0, indX - radius);
+        let endIndX = Math.min(this.fogLayer.layer.width - 1, indX + radius);
+        let startIndY = Math.max(0, indY - radius);
+        let endIndY = Math.min(this.fogLayer.layer.height - 1, indY + radius);
+
+        for(let y = startIndY; y <= endIndY; y++) {
+            for(let x = startIndX; x <= endIndX; x++) {
+                this.fogLayer.layer.data[y][x].visible = false;
+            }
         }
     }
 }
