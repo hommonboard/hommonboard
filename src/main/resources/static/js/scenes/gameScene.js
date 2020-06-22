@@ -6,9 +6,12 @@ export default class GameScene extends Phaser.Scene {
     create() {
         var map = this.make.tilemap({ key: 'map' });
         var groundTiles = map.addTilesetImage('ground', 'groundTiles');
+        var treeTiles = map.addTilesetImage('trees', 'treeTiles');
         var borderTiles = map.addTilesetImage('gameBoardBorder', 'borderTiles');
         var fogTiles = map.addTilesetImage('spaceTile', 'fogTiles');
         var groundLayer = map.createStaticLayer("GroundLayer", groundTiles, 0, 0);
+        var treeLayer = map.createStaticLayer("TreeLayer", treeTiles, 0, 0);
+        treeLayer.setCollisionByProperty({ collides: true });
         var borderLayer = map.createStaticLayer("BorderLayer", borderTiles, 0, 0);
         this.fogLayer = map.createDynamicLayer("FogLayer", fogTiles, 0, 0);
         borderLayer.setCollisionByProperty({ collides: true });
@@ -17,6 +20,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.hero = this.physics.add.sprite(96, 96, "luna");
         this.physics.add.collider(this.hero, borderLayer);
+        this.physics.add.collider(this.hero, treeLayer);
 
         let camera = this.cameras.main;
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
