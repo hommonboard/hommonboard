@@ -1,18 +1,14 @@
 export default class Debug {
-    constructor(ctx, enable=false) {
-        this.isEnable = enable;
-        this.ctx = ctx;
+    constructor() {
         this.labels = new Map();
         this.values = new Map();
         this.info = [];
-        this.baseX = 10;
-        this.baseY = 10;
+        this.ctx = null;
     }
 
-    create(x=10, y=10) {
-        this.baseX = x;
-        this.baseY = y;
-        this.text = this.ctx.add.text(x, y, '', { fill: '#00ff00' });
+    init(ctx) {
+        this.ctx = ctx;
+        this.text = this.ctx.add.text(0, 0, '', { fill: '#00ff00' });
     }
 
     addInfoElement(key, label, value = "") {
@@ -27,11 +23,8 @@ export default class Debug {
     }
 
     update() {
-        if (this.isEnable) {
-            this.updatePosition();
-            this.updateInfo();
-            this.text.setText(this.info);
-        }
+        this.updateInfo();
+        this.text.setText(this.info);
     }
 
     updateInfo() {
@@ -39,10 +32,5 @@ export default class Debug {
         this.labels.forEach((label, k) => {
             this.info.push(label + this.values.get(k));
         });
-    }
-
-    updatePosition() {
-        this.text.x = this.ctx.cameras.main.worldView.x + this.baseX;
-        this.text.y = this.ctx.cameras.main.worldView.y + this.baseY;
     }
 }

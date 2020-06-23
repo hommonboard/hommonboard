@@ -1,4 +1,5 @@
 import Debug from "../debug/debug.js";
+import DebugScene from "./debugScene.js";
 
 export default class GameScene extends Phaser.Scene {
     constructor() {
@@ -48,13 +49,14 @@ export default class GameScene extends Phaser.Scene {
     }
 
     createDebug() {
-          this.debug = new Debug(this, true);
-          this.debug.create(10, 10);
-          this.debug.addInfoElement("heroPosition", "Hero (x,y)=", "(0,0)");
-          this.debug.addInfoElement("pointerDownPosition", "PointerDown (x,y)=", "(0,0)");
-          this.debug.addInfoElement("pointerPosition", "Pointer (x,y)=", "(0,0)");
-          this.debug.addInfoElement("distance", "Distance=", "0");
-          this.debug.update();
+        this.debug = new Debug();
+        this.debug.addInfoElement("heroPosition", "Hero (x,y)=", "(0,0)");
+        this.debug.addInfoElement("pointerDownPosition", "PointerDown (x,y)=", "(0,0)");
+        this.debug.addInfoElement("pointerPosition", "Pointer (x,y)=", "(0,0)");
+        this.debug.addInfoElement("distance", "Distance=", "0");
+
+        let debugScene = new DebugScene(this.debug);
+        this.scene.add("DebugScene", debugScene, true);
     }
 
     update(time, delta) {
@@ -73,7 +75,6 @@ export default class GameScene extends Phaser.Scene {
         }
 
         this.showMap();
-        this.debug.update();
     }
 
     showMap() {

@@ -3,7 +3,7 @@ import LoadMenuScene from "./scenes/load/loadMenuScene.js";
 import MenuScene from "./scenes/menuScene.js";
 import LoadGameScene from "./scenes/load/loadGameScene.js";
 import GameScene from "./scenes/gameScene.js";
-import {createResizeGameWindowFunction} from "./utils.js"
+import {createResizeGameWindowFunction} from "./utils.js";
 
 window.onload = function() {
     var config = {
