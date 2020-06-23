@@ -1,6 +1,9 @@
+import Debug from "../debug/debug.js";
+
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super("GameScene");
+        this.target = new Phaser.Math.Vector2();
     }
 
     create() {
@@ -26,27 +29,51 @@ export default class GameScene extends Phaser.Scene {
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         camera.startFollow(this.hero);
         this.showMap();
+
+        this.createDebug();
+
+        this.input.on('pointerdown', function (pointer) {
+            this.target.x = pointer.worldX;
+            this.target.y = pointer.worldY;
+
+            this.debug.setValue("pointerDownPosition", "(" + pointer.worldX + "," + pointer.worldY + ")");
+
+            // Move at 200 px/s:
+            this.physics.moveToObject(this.hero, this.target, 200);
+        }, this);
+
+        this.input.on('pointermove', function (pointer) {
+            this.debug.setValue("pointerPosition",  "(" + pointer.worldX + "," + pointer.worldY + ")");
+        }, this);
+    }
+
+    createDebug() {
+          this.debug = new Debug(this, true);
+          this.debug.create(10, 10);
+          this.debug.addInfoElement("heroPosition", "Hero (x,y)=", "(0,0)");
+          this.debug.addInfoElement("pointerDownPosition", "PointerDown (x,y)=", "(0,0)");
+          this.debug.addInfoElement("pointerPosition", "Pointer (x,y)=", "(0,0)");
+          this.debug.addInfoElement("distance", "Distance=", "0");
+          this.debug.update();
     }
 
     update(time, delta) {
-        // Stop any previous movement from the last frame
-        this.hero.body.setVelocity(0);
 
-        // Horizontal movement
-        if (this.cursors.left.isDown) {
-            this.hero.body.setVelocityX(-200);
-        } else if (this.cursors.right.isDown) {
-            this.hero.body.setVelocityX(200);
-        }
+        this.debug.setValue("heroPosition", "("+ this.hero.x + "," + this.hero.y + ")");
 
-        // Vertical movement
-        if (this.cursors.up.isDown) {
-            this.hero.body.setVelocityY(-200);
-        } else if (this.cursors.down.isDown) {
-            this.hero.body.setVelocityY(200);
+        let distance = Phaser.Math.Distance.Between(this.hero.x, this.hero.y, this.target.x, this.target.y);
+
+        if (this.hero.body.speed > 0)
+        {
+            this.debug.setValue("distance", distance);
+            if (distance < 10)
+            {
+                this.hero.body.reset(this.target.x, this.target.y);
+            }
         }
 
         this.showMap();
+        this.debug.update();
     }
 
     showMap() {
