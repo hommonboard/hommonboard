@@ -109,7 +109,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     checkCollision(x,y) {
-        var tile = this.map.getTileAt(x, y);
-        return tile.properties.collide == true;
+        var tile = this.map.getTileAt(x, y, false, 2);
+        return tile != null ? tile.collides == true : false;
     };
 }
