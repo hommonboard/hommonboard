@@ -8,16 +8,16 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        var map = this.make.tilemap({ key: 'map' });
-        var groundTiles = map.addTilesetImage('ground', 'groundTiles');
-        var treeTiles = map.addTilesetImage('trees', 'treeTiles');
-        var borderTiles = map.addTilesetImage('gameBoardBorder', 'borderTiles');
-        var fogTiles = map.addTilesetImage('spaceTile', 'fogTiles');
-        var groundLayer = map.createStaticLayer("GroundLayer", groundTiles, 0, 0);
-        var treeLayer = map.createStaticLayer("TreeLayer", treeTiles, 0, 0);
+        this.map = this.make.tilemap({ key: 'map' });
+        var groundTiles = this.map.addTilesetImage('ground', 'groundTiles');
+        var treeTiles = this.map.addTilesetImage('trees', 'treeTiles');
+        var borderTiles = this.map.addTilesetImage('gameBoardBorder', 'borderTiles');
+        var fogTiles = this.map.addTilesetImage('spaceTile', 'fogTiles');
+        var groundLayer = this.map.createStaticLayer("GroundLayer", groundTiles, 0, 0);
+        var treeLayer = this.map.createStaticLayer("TreeLayer", treeTiles, 0, 0);
         treeLayer.setCollisionByProperty({ collides: true });
-        var borderLayer = map.createStaticLayer("BorderLayer", borderTiles, 0, 0);
-        this.fogLayer = map.createDynamicLayer("FogLayer", fogTiles, 0, 0);
+        var borderLayer = this.map.createStaticLayer("BorderLayer", borderTiles, 0, 0);
+        this.fogLayer = this.map.createDynamicLayer("FogLayer", fogTiles, 0, 0);
         borderLayer.setCollisionByProperty({ collides: true });
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -27,10 +27,11 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.hero, treeLayer);
 
         let camera = this.cameras.main;
-        camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         camera.startFollow(this.hero);
         this.showMap();
 
+        this.createMarker();
         this.createDebug();
 
         this.input.on('pointerdown', function (pointer) {
@@ -45,7 +46,20 @@ export default class GameScene extends Phaser.Scene {
 
         this.input.on('pointermove', function (pointer) {
             this.debug.setValue("pointerPosition",  "(" + pointer.worldX + "," + pointer.worldY + ")");
+
+            // Rounds down to nearest tile
+            var pointerTileX = this.map.worldToTileX(pointer.worldX);
+            var pointerTileY = this.map.worldToTileY(pointer.worldY);
+            this.marker.x = this.map.tileToWorldX(pointerTileX);
+            this.marker.y = this.map.tileToWorldY(pointerTileY);
+            this.marker.setVisible(!this.checkCollision(pointerTileX, pointerTileY));
         }, this);
+    }
+
+    createMarker() {
+        this.marker = this.add.graphics();
+        this.marker.lineStyle(3, 0xffffff, 1);
+        this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
     }
 
     createDebug() {
@@ -93,4 +107,9 @@ export default class GameScene extends Phaser.Scene {
             }
         }
     }
+
+    checkCollision(x,y) {
+        var tile = this.map.getTileAt(x, y);
+        return tile.properties.collide == true;
+    };
 }
