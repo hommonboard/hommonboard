@@ -1,5 +1,5 @@
-import Debug from "../debug/debug.js";
-import DebugScene from "./debugScene.js";
+import Debug from "../../debug/debug.js";
+import DebugScene from "../debugScene.js";
 
 export default class GameScene extends Phaser.Scene {
     constructor() {

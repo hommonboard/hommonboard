@@ -32,7 +32,9 @@ export default class MenuScene extends Phaser.Scene {
         );
         menuPlay.setOrigin(0.5, 1);
         menuPlay.setInteractive();
-        menuPlay.on("pointerdown", () => this.scene.start("LoadGameScene"), this);
+        menuPlay.on("pointerdown", () => {
+            this.scene.start("GameSettingsScene");
+        }, this);
         menuPlay.on("pointerover", () => pointerOver(menuPlay), this);
         menuPlay.on("pointerout", () => pointerOut(menuPlay), this);
     }
