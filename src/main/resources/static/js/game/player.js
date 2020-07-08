@@ -5,44 +5,56 @@ export default class Player {
         this.activeHero = null;
         this.castles = new Map();
         this.activeCastle = null;
+
+        this.MAX_HEROES_COUNT = 8;
+        this.MAX_CASTLES_COUNT = 8;
     }
 
-    init(hrs, cstls) {
-        this.heroes = new Map();
-        this.castles = new Map();
+    preload() {
 
-        if (hrs != null && hrs.length > 0) {
-            hrs.forEach((hero) => {
-                this.addHero(hero);
-            });
-            this.setActiveHero(hrs[0].name);
-        }
-
-        if (cstls != null && cstls.length > 0) {
-            cstls.forEach((castle) => {
-                this.addCastle(castle);
-            });
-            this.setActiveCastle(cstls[0].name);
-        }
     }
 
     addHero(hero) {
         this.heroes.set(hero.name, hero);
+        return true;
+    }
+
+    removeHero(name) {
+        let isDeleted = this.heroes.delete(name);
+        if (this.activeHero.name === name) {
+            this.activeHero = this.heroes.values().next().value;
+        }
+        return isDeleted;
     }
 
     setActiveHero(name) {
+        let isSet = false;
         if (this.heroes.get(name)) {
             this.activeHero = this.heroes.get(name);
+            isSet = true;
         }
+        return isSet;
     }
 
     addCastle(castle) {
-            this.castles.set(castle.name, castle);
+        this.castles.set(castle.name, castle);
+        return true;
+    }
+
+    removeCastle(name) {
+        let isDeleted = this.castles.delete(name);
+        if (this.activeCastle.name === name) {
+            this.activeCastle = this.castles.values().next().value;
+        }
+        return isDeleted;
     }
 
     setActiveCastle(name) {
+        let isSet = false;
         if (this.castles.get(name)) {
             this.activeCastle = this.castles.get(name);
+            isSet = true;
         }
+        return isSet;
     }
 }

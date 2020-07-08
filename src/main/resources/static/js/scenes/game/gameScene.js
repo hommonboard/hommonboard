@@ -17,15 +17,15 @@ export default class GameScene extends Phaser.Scene {
         var treeLayer = this.map.createStaticLayer("TreeLayer", treeTiles, 0, 0);
         treeLayer.setCollisionByProperty({ collides: true });
         var borderLayer = this.map.createStaticLayer("BorderLayer", borderTiles, 0, 0);
-        this.fogLayer = this.map.createDynamicLayer("FogLayer", fogTiles, 0, 0);
         borderLayer.setCollisionByProperty({ collides: true });
 
-        this.cursors = this.input.keyboard.createCursorKeys();
+        this.game.gameSession.activePlayer.activeHero.create(this);
+        this.hero = this.game.gameSession.activePlayer.activeHero.body;
 
-        this.hero = this.physics.add.sprite(64, 64, "luna");
-        this.hero.setOrigin(0, 0);
         this.physics.add.collider(this.hero, borderLayer);
         this.physics.add.collider(this.hero, treeLayer);
+
+        this.fogLayer = this.map.createDynamicLayer("FogLayer", fogTiles, 0, 0);
 
         let camera = this.cameras.main;
         camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);

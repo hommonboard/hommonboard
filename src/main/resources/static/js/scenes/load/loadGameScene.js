@@ -12,7 +12,7 @@ export default class LoadGameScene extends BaseLoadScene {
         this.load.image('borderTiles', '../assets/tilemaps/tiles/gameBoardBorder.png');
         this.load.image('fogTiles', '../assets/tilemaps/tiles/spaceTile.png');
         this.load.tilemapTiledJSON('map', '../assets/tilemaps/maps/map.json');
-        this.load.image('luna', '../assets/images/heroes/luna.png');
+        this.game.gameSession.activePlayer.activeHero.preload(this);
     }
 
     create() {

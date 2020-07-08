@@ -2,21 +2,23 @@ export default class GameSession {
     constructor() {
         this.players = new Map();
         this.activePlayer = null;
+        this.map = new Map();
     }
 
-    init(ps) {
-        this.players = new Map();
-
-        if (ps != null && ps.length > 0) {
-            ps.forEach((player) => {
-                this.addPlayer(player);
-            });
-            this.setActivePlayer(ps[0].name);
-        }
+    setMap(map) {
+        this.map = map;
     }
 
     addPlayer(player) {
         this.players.set(player.name, player);
+    }
+
+    removePlayer(name) {
+        let isDeleted = this.players.delete(name);
+        if (this.activePlayer.name === name) {
+            this.activePlayer = this.players.values().next().value;
+        }
+        return isDeleted;
     }
 
     setActivePlayer(name) {
