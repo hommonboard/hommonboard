@@ -10,8 +10,16 @@ export default class Player {
         this.MAX_CASTLES_COUNT = 8;
     }
 
-    preload() {
+    preload(ctx) {
+        this.heroes.forEach(hero => {
+            hero.preload(ctx);
+        });
+    }
 
+    create(ctx) {
+        this.heroes.forEach(hero => {
+            hero.create(ctx);
+        });
     }
 
     addHero(hero) {

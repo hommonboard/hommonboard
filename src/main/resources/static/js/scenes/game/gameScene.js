@@ -8,24 +8,15 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        this.map = this.make.tilemap({ key: 'map' });
-        var groundTiles = this.map.addTilesetImage('ground', 'groundTiles');
-        var treeTiles = this.map.addTilesetImage('trees', 'treeTiles');
-        var borderTiles = this.map.addTilesetImage('gameBoardBorder', 'borderTiles');
-        var fogTiles = this.map.addTilesetImage('spaceTile', 'fogTiles');
-        var groundLayer = this.map.createStaticLayer("GroundLayer", groundTiles, 0, 0);
-        var treeLayer = this.map.createStaticLayer("TreeLayer", treeTiles, 0, 0);
-        treeLayer.setCollisionByProperty({ collides: true });
-        var borderLayer = this.map.createStaticLayer("BorderLayer", borderTiles, 0, 0);
-        borderLayer.setCollisionByProperty({ collides: true });
+        this.game.gameSession.create(this);
 
-        this.game.gameSession.activePlayer.activeHero.create(this);
+        this.map = this.game.gameSession.map.map;
         this.hero = this.game.gameSession.activePlayer.activeHero.body;
 
-        this.physics.add.collider(this.hero, borderLayer);
-        this.physics.add.collider(this.hero, treeLayer);
+        this.physics.add.collider(this.hero, this.game.gameSession.map.borderLayer);
+        this.physics.add.collider(this.hero, this.game.gameSession.map.treeLayer);
 
-        this.fogLayer = this.map.createDynamicLayer("FogLayer", fogTiles, 0, 0);
+        this.fogLayer = this.game.gameSession.map.fogLayer;
 
         let camera = this.cameras.main;
         camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
