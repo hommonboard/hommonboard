@@ -14,7 +14,7 @@ export default class GameScene extends Phaser.Scene {
         this.hero = this.game.gameSession.activePlayer.activeHero.body;
 
         this.physics.add.collider(this.hero, this.game.gameSession.map.borderLayer);
-        this.physics.add.collider(this.hero, this.game.gameSession.map.treeLayer);
+        this.physics.add.collider(this.hero, this.game.gameSession.map.natureLayer);
 
         this.fogLayer = this.game.gameSession.map.fogLayer;
 
@@ -116,11 +116,11 @@ export default class GameScene extends Phaser.Scene {
 
     checkCollision(x,y) {
         let isCollision = false;
-        let tile = this.map.getTileAt(x, y, false, 2);
+        let tile = this.map.getTileAt(x, y, false, 1);
         isCollision = tile != null ? tile.collides == true : false;
 
         if (!isCollision) {
-            tile = this.map.getTileAt(x, y, false, 1);
+            tile = this.map.getTileAt(x, y, false, 4);
             isCollision = tile != null ? tile.collides == true : false;
         }
 
@@ -128,7 +128,10 @@ export default class GameScene extends Phaser.Scene {
     };
 
     getTileID(x,y) {
-        var tile = this.map.getTileAt(x, y, false, 2);
+        var tile = this.map.getTileAt(x, y, false, 1); // nature layer (index = 1)
+        if (tile == null) {
+            tile = this.map.getTileAt(x, y, false, 4); // border layer (index = 4)
+        }
         return tile != null ? tile.index : 0;
     }
 

@@ -13,7 +13,7 @@ export default class Luna extends Hero {
     }
 
     create(ctx) {
-        this.body = ctx.physics.add.sprite(INFO.TILE_WIDTH, INFO.TILE_HEIGHT, this.name);
+        this.body = ctx.physics.add.sprite(384, 384, this.name);
         this.body.setOrigin(0, 0);
     }
 }
