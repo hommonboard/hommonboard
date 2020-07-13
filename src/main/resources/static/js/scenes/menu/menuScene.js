@@ -23,20 +23,36 @@ export default class MenuScene extends Phaser.Scene {
     }
 
     createIntroMenu() {
-        let menuPlay = this.add.bitmapText(
+        this.createNewGameButton();
+    }
+
+    createNewGameButton() {
+        let buttonBorder = this.add.image(0, 0, "menuButtonBorder");
+        let buttonBody = this.add.image(0, 0, "menuButtonBody");
+        let text = this.add.text(0, 0, 'New game', { fontFamily: 'Arial', fontSize: 23, color: '#ffcc66' });
+        text.setOrigin(0.5, 0.5);
+
+        let container = this.add.container(
             this.game.config.width / 2,
             this.game.config.height - this.game.config.height / 3,
-            "font",
-            "Play",
-            23
+            [buttonBorder, buttonBody, text]
         );
-        menuPlay.setOrigin(0.5, 1);
-        menuPlay.setInteractive();
-        menuPlay.on("pointerdown", () => {
+
+        buttonBody.setInteractive();
+
+        buttonBody.on('pointerover', function () {
+            buttonBody.setTint(0x80ff80);
+            buttonBorder.setTint(0xffe033);
+        });
+
+        buttonBody.on('pointerout', function () {
+            buttonBody.clearTint();
+            buttonBorder.clearTint();
+        });
+
+        buttonBody.on("pointerdown", () => {
             this.scene.start("GameSettingsScene");
         }, this);
-        menuPlay.on("pointerover", () => pointerOver(menuPlay), this);
-        menuPlay.on("pointerout", () => pointerOut(menuPlay), this);
     }
 
     createGithubLink() {
