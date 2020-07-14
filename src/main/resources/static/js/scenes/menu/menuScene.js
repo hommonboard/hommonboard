@@ -50,7 +50,7 @@ export default class MenuScene extends Phaser.Scene {
             buttonBorder.clearTint();
         });
 
-        buttonBody.on("pointerdown", () => {
+        buttonBody.on("pointerup", () => {
             this.scene.start("GameSettingsScene");
         }, this);
     }

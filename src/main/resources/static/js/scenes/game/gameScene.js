@@ -11,7 +11,7 @@ export default class GameScene extends Phaser.Scene {
         this.game.gameSession.create(this);
 
         this.map = this.game.gameSession.map.map;
-        this.hero = this.game.gameSession.activePlayer.activeHero.body;
+        this.hero = this.game.gameSession.activePlayer.activeHero.mapObject;
 
         this.physics.add.collider(this.hero, this.game.gameSession.map.borderLayer);
         this.physics.add.collider(this.hero, this.game.gameSession.map.natureLayer);
