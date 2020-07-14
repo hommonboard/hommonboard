@@ -5,6 +5,20 @@ export default class GameSession {
         this.map = new Map();
     }
 
+    preload(ctx) {
+        this.map.preload(ctx);
+        this.players.forEach(player => {
+            player.preload(ctx);
+        });
+    }
+
+    create(ctx) {
+        this.map.create(ctx);
+        this.players.forEach(player => {
+            player.create(ctx);
+        });
+    }
+
     setMap(map) {
         this.map = map;
     }

@@ -19,6 +19,9 @@ export default class GameSettingsScene extends Phaser.Scene {
     createGameSession() {
         this.game.gameSession = new GameSession();
 
+        let map = new Map();
+        this.game.gameSession.setMap(map);
+
         let player = new Player("player1");
 
         let heroFactory = new HeroFactory();
