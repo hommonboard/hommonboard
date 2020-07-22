@@ -1,5 +1,6 @@
 import Debug from "../../debug/debug.js";
 import DebugScene from "../debugScene.js";
+import MapUIScene from "./mapUIScene.js";
 
 export default class GameScene extends Phaser.Scene {
     constructor() {
@@ -26,6 +27,7 @@ export default class GameScene extends Phaser.Scene {
         this.createMarker();
         this.createPathFinder();
         this.createDebug();
+        this.createMapUI();
 
         this.input.on('pointerup', this.handleClick, this);
 
@@ -69,6 +71,11 @@ export default class GameScene extends Phaser.Scene {
         }
 
         this.finder.setAcceptableTiles(acceptableTiles);
+    }
+
+    createMapUI() {
+        let mapUIScene = new MapUIScene();
+        this.scene.add("MapUIScene", mapUIScene, true);
     }
 
     createDebug() {

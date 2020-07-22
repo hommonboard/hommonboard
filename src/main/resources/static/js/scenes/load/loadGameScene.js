@@ -7,6 +7,7 @@ export default class LoadGameScene extends BaseLoadScene {
 
     preload() {
         this.createLoadingBar();
+        this.load.image("mapUIPanel", "../assets/images/ui/map/mapUIPanel.png");
         this.game.gameSession.preload(this);
     }
 
