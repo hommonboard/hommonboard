@@ -16,9 +16,9 @@ export default class Player {
         });
     }
 
-    create(ctx) {
+    createOnMap(ctx) {
         this.heroes.forEach(hero => {
-            hero.create(ctx);
+            hero.createOnMap(ctx);
         });
     }
 

@@ -14,9 +14,11 @@ export default class MapUIScene extends Phaser.Scene {
             260
         );
 
-        let hommonboard = this.add.image(0, 0, "mapUIPanel");
-        hommonboard.setOrigin(0, 0);
-        this.text = this.add.text(0, 0, 'MAP_UI_SCENE', { fill: '#00ff00' });
+        let mapUIPanel = this.add.image(0, 0, "mapUIPanel");
+        mapUIPanel.setOrigin(0, 0);
+
+        var hero = this.game.gameSession.activePlayer.activeHero;
+        hero.createOnMapUI(this);
     }
 
     update() {

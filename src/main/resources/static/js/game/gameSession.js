@@ -12,10 +12,10 @@ export default class GameSession {
         });
     }
 
-    create(ctx) {
+    createOnMap(ctx) {
         this.map.create(ctx);
         this.players.forEach(player => {
-            player.create(ctx);
+            player.createOnMap(ctx);
         });
     }
 

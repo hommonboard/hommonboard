@@ -9,7 +9,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        this.game.gameSession.create(this);
+        this.game.gameSession.createOnMap(this);
 
         this.map = this.game.gameSession.map.map;
         this.hero = this.game.gameSession.activePlayer.activeHero.mapObject;
