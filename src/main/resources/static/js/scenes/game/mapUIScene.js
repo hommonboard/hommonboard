@@ -16,9 +16,7 @@ export default class MapUIScene extends Phaser.Scene {
 
         let mapUIPanel = this.add.image(0, 0, "mapUIPanel");
         mapUIPanel.setOrigin(0, 0);
-
-        var hero = this.game.gameSession.activePlayer.activeHero;
-        hero.createOnMapUI(this);
+        this.game.gameSession.activePlayer.createOnMapUI(this);
     }
 
     update() {

@@ -1,3 +1,4 @@
 export const HERO_NAMES = {
-    LUNA: "luna"
+    LUNA: "luna",
+    LABETHA: "labetha"
 };

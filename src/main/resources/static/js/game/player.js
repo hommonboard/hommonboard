@@ -22,6 +22,16 @@ export default class Player {
         });
     }
 
+    createOnMapUI(ctx) {
+        var x = 5;
+        var y = 5;
+
+        this.heroes.forEach(hero => {
+            hero.createOnMapUI(ctx, x, y);
+            x += 70;
+        });
+    }
+
     addHero(hero) {
         this.heroes.set(hero.name, hero);
         return true;

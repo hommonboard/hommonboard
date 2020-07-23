@@ -1,4 +1,6 @@
 import GameObject from "../gameObject.js";
+import {INFO} from "../info.js";
+import {getX, getY} from "../tools.js";
 
 export default class Hero extends GameObject {
     constructor(name, displayName) {
@@ -23,13 +25,14 @@ export default class Hero extends GameObject {
         this.sourceMapUIFaceKey = "heroMapUIFace" + this.name + "Key";
         this.sourceMapUIFace = null;
         this.sourceMapUIBorderKey = "heroMapUIBorderKey";
-        this.sourceMapUIBorder = "../assets/images/heroes/hero_map_border.png";
+        this.sourceMapUIBorder = "../assets/images/heroes/hero_map_ui_border.png";
     }
 
     preload(ctx) {
         ctx.load.image(this.sourceMapBorderKey, this.sourceMapBorder);
-        ctx.load.image(this.sourceMapFaceKey, this.sourceMapFace);
         ctx.load.image(this.sourceMapUIBorderKey, this.sourceMapUIBorder);
+
+        ctx.load.image(this.sourceMapFaceKey, this.sourceMapFace);
         ctx.load.image(this.sourceMapUIFaceKey, this.sourceMapUIFace);
     }
 
@@ -40,19 +43,19 @@ export default class Hero extends GameObject {
         this.mapBorder.setOrigin(0, 0);
 
         this.mapObject = ctx.add.container(
-            384, 384,
+            getX(this.indX), getY(this.indY),
             [this.mapFace, this.mapBorder]
         );
     }
 
-    createOnMapUI(ctx) {
+    createOnMapUI(ctx, x=5, y=5) {
         this.mapUIFace = ctx.physics.add.sprite(0, 0, this.sourceMapUIFaceKey);
         this.mapUIFace.setOrigin(0, 0);
         this.mapUIBorder = ctx.physics.add.sprite(0, 0, this.sourceMapUIBorderKey);
         this.mapUIBorder.setOrigin(0, 0);
 
         this.mapUIObject = ctx.add.container(
-            5, 5,
+            x, y,
             [this.mapUIFace, this.mapUIBorder]
         );
 

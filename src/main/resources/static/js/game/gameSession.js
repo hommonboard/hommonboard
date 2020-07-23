@@ -19,6 +19,12 @@ export default class GameSession {
         });
     }
 
+    createOnMapUI(ctx) {
+        this.players.forEach(player => {
+            player.createOnMapUI(ctx);
+        });
+    }
+
     setMap(map) {
         this.map = map;
     }
