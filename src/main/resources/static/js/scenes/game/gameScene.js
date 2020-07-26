@@ -22,6 +22,8 @@ export default class GameScene extends Phaser.Scene {
         let camera = this.cameras.main;
         camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         camera.startFollow(this.hero);
+        camera.roundPixels = true;
+
         this.showMap();
 
         this.createMarker();
