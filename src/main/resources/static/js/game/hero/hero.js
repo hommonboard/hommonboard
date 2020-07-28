@@ -87,6 +87,7 @@ export default class Hero extends GameObject {
 
         this.gameSession.mapScene.hero = this.mapObject;
         this.gameSession.mapScene.cameras.main.startFollow(this.mapObject);
+        this.gameSession.mapScene.cameras.main.roundPixels = true;
     }
 
     setInactive() {
