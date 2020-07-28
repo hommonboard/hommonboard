@@ -1,8 +1,8 @@
 import GameObject from "./gameObject.js";
 
 export default class Castle extends GameObject {
-    constructor(name, displayName) {
-        super(name, displayName);
+    constructor(gameSession, name, displayName) {
+        super(gameSession, name, displayName);
         this.units = new Map();
     }
 }

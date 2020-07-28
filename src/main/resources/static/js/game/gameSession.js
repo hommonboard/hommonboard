@@ -3,6 +3,9 @@ export default class GameSession {
         this.players = new Map();
         this.activePlayer = null;
         this.map = new Map();
+
+        this.mapScene = null;
+        this.mapUIScene = null;
     }
 
     preload(ctx) {
@@ -13,6 +16,9 @@ export default class GameSession {
     }
 
     createOnMap(ctx) {
+        this.mapScene = ctx;
+        var gs = this;
+
         this.map.create(ctx);
         this.players.forEach(player => {
             player.createOnMap(ctx);
@@ -20,6 +26,8 @@ export default class GameSession {
     }
 
     createOnMapUI(ctx) {
+        this.mapUIScene = ctx;
+
         this.players.forEach(player => {
             player.createOnMapUI(ctx);
         });

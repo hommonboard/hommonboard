@@ -3,8 +3,8 @@ import {INFO} from "../info.js";
 import {getX, getY} from "../tools.js";
 
 export default class Hero extends GameObject {
-    constructor(name, displayName) {
-        super(name, displayName);
+    constructor(gameSession, name, displayName) {
+        super(gameSession, name, displayName);
         this.units = new Map();
 
         this.active = false;
@@ -46,6 +46,9 @@ export default class Hero extends GameObject {
             getX(this.indX), getY(this.indY),
             [this.mapFace, this.mapBorder]
         );
+
+        ctx.physics.add.collider(this.mapObject, this.gameSession.map.borderLayer);
+        ctx.physics.add.collider(this.mapObject, this.gameSession.map.natureLayer);
     }
 
     createOnMapUI(ctx, x=5, y=5) {
@@ -63,9 +66,11 @@ export default class Hero extends GameObject {
 
         this.mapUIFace.on('pointerup', function () {
             if (!this.active) {
+                this.gameSession.activePlayer.heroes.forEach(hero => {
+                    hero.setInactive();
+                });
+
                 this.setActive();
-            } else {
-                this.setInactive();
             }
 
         }, this);
@@ -79,6 +84,9 @@ export default class Hero extends GameObject {
         if (this.mapUIBorder) {
             this.mapUIBorder.setTint(0x80e5ff);
         }
+
+        this.gameSession.mapScene.hero = this.mapObject;
+        this.gameSession.mapScene.cameras.main.startFollow(this.mapObject);
     }
 
     setInactive() {

@@ -14,14 +14,10 @@ export default class GameScene extends Phaser.Scene {
         this.map = this.game.gameSession.map.map;
         this.hero = this.game.gameSession.activePlayer.activeHero.mapObject;
 
-        this.physics.add.collider(this.hero, this.game.gameSession.map.borderLayer);
-        this.physics.add.collider(this.hero, this.game.gameSession.map.natureLayer);
-
         this.fogLayer = this.game.gameSession.map.fogLayer;
 
         let camera = this.cameras.main;
         camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        camera.startFollow(this.hero);
         camera.roundPixels = true;
 
         this.showMap();
@@ -30,6 +26,8 @@ export default class GameScene extends Phaser.Scene {
         this.createPathFinder();
         this.createDebug();
         this.createMapUI();
+
+        this.game.gameSession.activePlayer.activeHero.setActive();
 
         this.input.on('pointerup', this.handleClick, this);
 

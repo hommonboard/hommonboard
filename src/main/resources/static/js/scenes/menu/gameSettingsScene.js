@@ -19,13 +19,14 @@ export default class GameSettingsScene extends Phaser.Scene {
     createGameSession() {
         this.game.gameSession = new GameSession();
 
-        let map = new Map();
+        let map = new Map(this.game.gameSession);
         this.game.gameSession.setMap(map);
 
-        let player = new Player("player1");
+        let player = new Player(this.game.gameSession, "player1");
 
         let heroFactory = new HeroFactory();
         let heroLuna = heroFactory.getHero(HERO_NAMES.LUNA);
+        heroLuna.gameSession = this.game.gameSession;
         heroLuna.indX = 5;
         heroLuna.indY = 5;
         player.addHero(heroLuna);
@@ -33,6 +34,7 @@ export default class GameSettingsScene extends Phaser.Scene {
         let heroLabetha = heroFactory.getHero(HERO_NAMES.LABETHA);
         heroLabetha.indX = 5;
         heroLabetha.indY = 6;
+        heroLabetha.gameSession = this.game.gameSession;
         player.addHero(heroLabetha);
 
         player.setActiveHero(heroLuna.name);

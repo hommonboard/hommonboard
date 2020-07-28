@@ -1,5 +1,6 @@
 export default class Map {
-    constructor() {
+    constructor(gameSession) {
+        this.gameSession = gameSession;
         this.map = null;
 
         this.borderTilesName = "border";

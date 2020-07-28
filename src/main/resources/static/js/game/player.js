@@ -1,5 +1,6 @@
 export default class Player {
-    constructor(name) {
+    constructor(gameSession, name) {
+        this.gameSession = gameSession;
         this.name = name;
         this.heroes = new Map();
         this.activeHero = null;

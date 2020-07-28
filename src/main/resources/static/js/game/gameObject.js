@@ -1,5 +1,6 @@
 export default class GameObject {
-    constructor(name, displayName) {
+    constructor(gameSession, name, displayName) {
+        this.gameSession = gameSession
         this.name = name;
         this.displayName = displayName ? displayName : name;
         this.indX = 0;
