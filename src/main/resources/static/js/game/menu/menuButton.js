@@ -19,15 +19,15 @@ export default class MenuButton {
         this.fontColor = fontColor;
     }
 
-    preload(ctx) {
-        ctx.load.image(this.menuButtonBodyKey, this.menuButtonBodySource);
-        ctx.load.image(this.menuButtonBorderKey, this.menuButtonBorderSource);
+    preload(scene) {
+        scene.load.image(this.menuButtonBodyKey, this.menuButtonBodySource);
+        scene.load.image(this.menuButtonBorderKey, this.menuButtonBorderSource);
     }
 
-    create(ctx) {
-        this.menuButtonBorder = ctx.add.image(0, 0, this.menuButtonBorderKey);
-        this.menuButtonBody = ctx.add.image(0, 0, this.menuButtonBodyKey);
-        this.textElement = ctx.add.text(
+    create(scene) {
+        this.menuButtonBorder = scene.add.image(0, 0, this.menuButtonBorderKey);
+        this.menuButtonBody = scene.add.image(0, 0, this.menuButtonBodyKey);
+        this.textElement = scene.add.text(
             0, 0, this.text,
             {
                 fontFamily: this.fontFamily,
@@ -38,7 +38,7 @@ export default class MenuButton {
 
         this.textElement.setOrigin(0.5, 0.5);
 
-        this.menuButton = ctx.add.container(
+        this.menuButton = scene.add.container(
             this.x,
             this.y,
             [this.menuButtonBorder, this.menuButtonBody, this.textElement]

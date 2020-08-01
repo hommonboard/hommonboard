@@ -5,8 +5,8 @@ export default class NewGameButton extends MenuButton {
         super(x, y, text);
     }
 
-    create(ctx) {
-        super.create(ctx);
+    create(scene) {
+        super.create(scene);
 
         this.menuButtonBody.setInteractive();
 
@@ -21,7 +21,7 @@ export default class NewGameButton extends MenuButton {
         }.bind(this));
 
         this.menuButtonBody.on("pointerup", function () {
-            ctx.scene.start("GameSettingsScene");
+            scene.scene.start("GameSettingsScene");
         }.bind(this));
     }
 }

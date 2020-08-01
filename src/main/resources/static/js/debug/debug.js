@@ -3,12 +3,12 @@ export default class Debug {
         this.labels = new Map();
         this.values = new Map();
         this.info = [];
-        this.ctx = null;
+        this.scene = null;
     }
 
-    init(ctx) {
-        this.ctx = ctx;
-        this.text = this.ctx.add.text(0, 0, '', { fill: '#00ff00' });
+    init(scene) {
+        this.scene = scene;
+        this.text = this.scene.add.text(0, 0, '', { fill: '#00ff00' });
     }
 
     addInfoElement(key, label, value = "") {

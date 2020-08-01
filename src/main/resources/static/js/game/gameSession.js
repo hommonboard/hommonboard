@@ -8,28 +8,28 @@ export default class GameSession {
         this.mapUIScene = null;
     }
 
-    preload(ctx) {
-        this.map.preload(ctx);
+    preload(scene) {
+        this.map.preload(scene);
         this.players.forEach(player => {
-            player.preload(ctx);
+            player.preload(scene);
         });
     }
 
-    createOnMap(ctx) {
-        this.mapScene = ctx;
+    createOnMap(scene) {
+        this.mapScene = scene;
         var gs = this;
 
-        this.map.create(ctx);
+        this.map.create(scene);
         this.players.forEach(player => {
-            player.createOnMap(ctx);
+            player.createOnMap(scene);
         });
     }
 
-    createOnMapUI(ctx) {
-        this.mapUIScene = ctx;
+    createOnMapUI(scene) {
+        this.mapUIScene = scene;
 
         this.players.forEach(player => {
-            player.createOnMapUI(ctx);
+            player.createOnMapUI(scene);
         });
     }
 

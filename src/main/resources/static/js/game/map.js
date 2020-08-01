@@ -40,17 +40,17 @@ export default class Map {
         this.mapDataSource = "../assets/tilemaps/maps/map.json";
     }
 
-    preload(ctx) {
-        ctx.load.image(this.borderSourceKey, this.borderSource);
-        ctx.load.image(this.fogSourceKey, this.fogSource);
-        ctx.load.image(this.roadSourceKey, this.roadSource);
-        ctx.load.image(this.natureSourceKey, this.natureSource);
-        ctx.load.image(this.groundSourceKey, this.groundSource);
-        ctx.load.tilemapTiledJSON(this.mapDataKey, this.mapDataSource);
+    preload(scene) {
+        scene.load.image(this.borderSourceKey, this.borderSource);
+        scene.load.image(this.fogSourceKey, this.fogSource);
+        scene.load.image(this.roadSourceKey, this.roadSource);
+        scene.load.image(this.natureSourceKey, this.natureSource);
+        scene.load.image(this.groundSourceKey, this.groundSource);
+        scene.load.tilemapTiledJSON(this.mapDataKey, this.mapDataSource);
     }
 
-    create(ctx) {
-        this.map = ctx.make.tilemap({ key: this.mapDataKey });
+    create(scene) {
+        this.map = scene.make.tilemap({ key: this.mapDataKey });
 
         this.groundTiles = this.map.addTilesetImage(this.groundTilesName, this.groundSourceKey);
         this.natureTiles = this.map.addTilesetImage(this.natureTilesName, this.natureSourceKey);

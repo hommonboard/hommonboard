@@ -11,24 +11,24 @@ export default class Player {
         this.MAX_CASTLES_COUNT = 8;
     }
 
-    preload(ctx) {
+    preload(scene) {
         this.heroes.forEach(hero => {
-            hero.preload(ctx);
+            hero.preload(scene);
         });
     }
 
-    createOnMap(ctx) {
+    createOnMap(scene) {
         this.heroes.forEach(hero => {
-            hero.createOnMap(ctx);
+            hero.createOnMap(scene);
         });
     }
 
-    createOnMapUI(ctx) {
+    createOnMapUI(scene) {
         var x = 5;
         var y = 5;
 
         this.heroes.forEach(hero => {
-            hero.createOnMapUI(ctx, x, y);
+            hero.createOnMapUI(scene, x, y);
             x += 70;
         });
     }

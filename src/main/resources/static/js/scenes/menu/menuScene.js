@@ -5,7 +5,7 @@ export default class MenuScene extends Phaser.Scene {
 
     create() {
         this.createIntroBackground();
-        this.createIntroMenu();
+        this.createMainMenu();
         this.createGithubLink();
     }
 
@@ -22,12 +22,8 @@ export default class MenuScene extends Phaser.Scene {
         );
     }
 
-    createIntroMenu() {
-        this.createNewGameButton();
-    }
-
-    createNewGameButton() {
-        this.game.menu.newGameButton.create(this);
+    createMainMenu() {
+        this.game.mainMenu.create(this);
     }
 
     createGithubLink() {

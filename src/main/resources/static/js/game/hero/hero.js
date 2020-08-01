@@ -28,36 +28,36 @@ export default class Hero extends GameObject {
         this.mapUIBorderSource = "../assets/images/heroes/hero_map_ui_border.png";
     }
 
-    preload(ctx) {
-        ctx.load.image(this.mapBorderKey, this.mapBorderSource);
-        ctx.load.image(this.mapUIBorderKey, this.mapUIBorderSource);
+    preload(scene) {
+        scene.load.image(this.mapBorderKey, this.mapBorderSource);
+        scene.load.image(this.mapUIBorderKey, this.mapUIBorderSource);
 
-        ctx.load.image(this.mapFaceKey, this.mapFaceSource);
-        ctx.load.image(this.mapUIFaceKey, this.mapUIFaceSource);
+        scene.load.image(this.mapFaceKey, this.mapFaceSource);
+        scene.load.image(this.mapUIFaceKey, this.mapUIFaceSource);
     }
 
-    createOnMap(ctx) {
-        this.mapFace = ctx.physics.add.sprite(0, 0, this.mapFaceKey);
+    createOnMap(scene) {
+        this.mapFace = scene.physics.add.sprite(0, 0, this.mapFaceKey);
         this.mapFace.setOrigin(0, 0);
-        this.mapBorder = ctx.physics.add.sprite(0, 0, this.mapBorderKey);
+        this.mapBorder = scene.physics.add.sprite(0, 0, this.mapBorderKey);
         this.mapBorder.setOrigin(0, 0);
 
-        this.mapObject = ctx.add.container(
+        this.mapObject = scene.add.container(
             getX(this.indX), getY(this.indY),
             [this.mapFace, this.mapBorder]
         );
 
-        ctx.physics.add.collider(this.mapObject, this.gameSession.map.borderLayer);
-        ctx.physics.add.collider(this.mapObject, this.gameSession.map.natureLayer);
+        scene.physics.add.collider(this.mapObject, this.gameSession.map.borderLayer);
+        scene.physics.add.collider(this.mapObject, this.gameSession.map.natureLayer);
     }
 
-    createOnMapUI(ctx, x=5, y=5) {
-        this.mapUIFace = ctx.physics.add.sprite(0, 0, this.mapUIFaceKey);
+    createOnMapUI(scene, x=5, y=5) {
+        this.mapUIFace = scene.physics.add.sprite(0, 0, this.mapUIFaceKey);
         this.mapUIFace.setOrigin(0, 0);
-        this.mapUIBorder = ctx.physics.add.sprite(0, 0, this.mapUIBorderKey);
+        this.mapUIBorder = scene.physics.add.sprite(0, 0, this.mapUIBorderKey);
         this.mapUIBorder.setOrigin(0, 0);
 
-        this.mapUIObject = ctx.add.container(
+        this.mapUIObject = scene.add.container(
             x, y,
             [this.mapUIFace, this.mapUIBorder]
         );
